@@ -1,0 +1,3 @@
+*.sw[op]
+tests
+checkstyle_report.xml

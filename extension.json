@@ -1,0 +1,63 @@
+{
+    "id": "ibm.devops.services.deployment_center.checkstyle",
+    "version": 1,
+    "name_key": "ExtName",
+    "desc_key": "ExtDesc",
+    "extension_type": "Test",
+    "message_key": "ExtMessage",
+    "inputs": [
+        {
+            "type": "Artifacts",
+            "inclusion" : "always"
+        }
+    ],
+    "params": [
+        {
+            "name": "TARGET",
+            "type": "Text",
+            "required": "true",
+            "default_value": "src",
+            "label_key": "TARGET_KEY",
+            "desc_key": "TARGET_DESC"
+        },
+        {
+            "name": "CONVENTION_STYLE",
+            "type": "Select",
+            "required": "true",
+            "default_value": "COPY",
+            "label_key": "CONVENTION_STYLE_KEY",
+            "desc_key": "CONVENTION_STYLE_DESC",
+            "options": [
+                {
+                    "label_key": "CONVENTION_STYLE_GOOGLE_KEY",
+                    "value": "google"
+                },
+                {
+                    "label_key": "CONVENTION_STYLE_SUN_KEY",
+                    "value": "sun"
+                }
+            ]
+        }
+    ],
+    "outputs": [
+        {
+            "type": "Tests",
+            "inclusion": "always"
+        }
+    ],
+    "execution": {
+        "type": "JenkinsDocker",
+        "shell": "#!/bin/bash
+export JAVA_HOME=$JAVA8_HOME
+export PATH=$JAVA_HOME/bin:$PATH
+
+export CONVENTION_STYLE='#CONVENTION_STYLE#'
+export TARGET='#TARGET#'
+
+bash execute.sh
+"
+    },
+    "project": "https://github.com/jgkong/checkstyle_extension",
+    "project_example": "https://github.com/jgkong/checkstyle_extension",
+    "project_contact": "jgkong@kr.ibm.com"
+}
